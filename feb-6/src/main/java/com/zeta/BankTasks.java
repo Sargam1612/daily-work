@@ -17,10 +17,11 @@ public class BankTasks {
             System.out.println(thread+" attempting to withdraw "+amount);
             try {
                 bankAccount.Withdraw(amount);
-            }catch (InterruptedException e){
-
+                System.out.println(thread+" completed withdrawal. "+amount);
+            }catch (IllegalArgumentException e){
+                e.printStackTrace();
             }
-            System.out.println(thread+" completed withdrawal. "+amount);
+
         }
     }
 
@@ -37,14 +38,42 @@ public class BankTasks {
         @Override
         public void run() {
             String thread = Thread.currentThread().getName();
-            System.out.println(thread+" attempting to deposit "+amount);
+            System.out.println(thread+" attempting to deposit of $"+amount);
             try{
-                  bankAccount.Deposit(amount);
+                bankAccount.Deposit(amount);
+                System.out.println(thread+" completed deposit of &"+amount);
             }catch(InterruptedException e){
 
             }
-            System.out.println(thread+" completed deposit. "+amount);
+
         }
+    }
+
+    public static class sanctionLoan implements Runnable{
+
+        public float pAmount;
+        public int tenure ;
+        private final BankAccount bankAccount;
+
+        public sanctionLoan(float pAmount, int tenure, BankAccount bankAccount) {
+            this.pAmount=pAmount;
+            this.tenure=tenure;
+            this.bankAccount = bankAccount;
+        }
+
+        @Override
+        public void run() {
+            String thread = Thread.currentThread().getName();
+            System.out.println(thread+" sanctioning loan for $"+pAmount);
+            try{
+                float interestAmount = bankAccount.loanSanction(pAmount,tenure);
+                System.out.println(thread+" sanctioned loan for $"+pAmount);
+            }catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+
+        }
+
     }
 
 
