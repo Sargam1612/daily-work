@@ -2,9 +2,25 @@ package com.zeta;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
+import java.util.function.Predicate;
+
+import static com.zeta.BankTasks.DepositTask;
+import static com.zeta.BankTasks.WithdrawTask;
 
 
 public class Main {
+
+    static DoubleConsumer Validator = a -> {
+        if (a <= 0) throw new IllegalArgumentException("Amount must be greater than 0");
+    };
+    static Consumer<String> log = msg -> System.out.println("[LOG] " + msg);
+
+    Predicate<Float> isValidAmount = a -> a > 0;
+
+
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -17,7 +33,9 @@ public class Main {
 
         BankTasks bankTask = new BankTasks();
 
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        //ExecutorService executor = Executors.newFixedThreadPool(3);
+        ExecutorService executor = Executors.newFixedThreadPool(3, r -> new Thread(r));
+
         // Validator v = new Validator(); make the method static
         while(true){
             System.out.println("What do you want to perform? ");
@@ -36,27 +54,26 @@ public class Main {
                     case 1:
                         System.out.println("Enter Amount to deposit: ");
                         float amount = sc.nextFloat();
-                        Validator.check(amount);
-                        executor.execute(bankTask.new DepositTask(bankaccount, amount));
+                        Validator.accept(amount);
+                        executor.execute(DepositTask(bankaccount, amount));
                         System.out.println(amount + " rupees deposited.");
                         break;
                     case 2:
                         System.out.println("Enter Amount to Withdraw: ");
                         amount = sc.nextFloat();
-                        Validator.check(amount);
-                        executor.execute(bankTask.new WithdrawTask(bankaccount, amount));
+                        Validator.accept(amount);
+                        executor.execute(WithdrawTask(bankaccount, amount));
                         System.out.println(amount + " rupees withdrawn.");
                         break;
                     case 3:
-                        System.out.println("Your balance is : " + bankaccount.getBalance());
+                        log.accept("Balance: " + bankaccount.getBalance());
                         break;
                     case 4:
                         System.out.println("Parallelizing withdrawals on half balance : " + bankaccount.getBalance() / 2);
-                        executor.execute(bankTask.new WithdrawTask(bankaccount, bankaccount.getBalance() / 2));
-                        executor.execute(bankTask.new WithdrawTask(bankaccount, bankaccount.getBalance() / 2));
+                        executor.execute(WithdrawTask(bankaccount, bankaccount.getBalance() / 2));
+                        executor.execute(WithdrawTask(bankaccount, bankaccount.getBalance() / 2));
                         break;
                     case 5:
-
                         System.out.print("Enter Principal Amount :");
                         float principalAmount = sc.nextFloat();
                         System.out.print("Enter Tenure(in years) :");

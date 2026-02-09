@@ -9,14 +9,15 @@ public class Loan {
         this.principalAmount = principalAmount;
         this.tenure = tenure;
     }
-    public static boolean sanction(float principalAmount, int tenure,BankAccount bankAccount){
-        try{
-            new BankTasks.sanctionLoan(principalAmount,tenure,bankAccount);
+    public static boolean sanction(float principalAmount, int tenure, BankAccount bankAccount) {
+        Runnable task = () -> bankAccount.loanSanction(principalAmount, tenure);
+        try {
+            task.run();
             return true;
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return false;
         }
-        return false;
-
     }
+
 }
