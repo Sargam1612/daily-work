@@ -2,9 +2,8 @@ package com.zeta;
 
 import java.util.concurrent.RecursiveTask;
 
-
 public class SumTask extends RecursiveTask<Integer>{
-    private static final int THRESHOLD =3;
+    private static final int THRESHOLD = 450;
     private Account[] arr;
     private int start,end;
 

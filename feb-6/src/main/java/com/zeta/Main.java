@@ -15,7 +15,7 @@ public class Main {
     static DoubleConsumer Validator = a -> {
         if (a <= 0) throw new IllegalArgumentException("Amount must be greater than 0");
     };
-    static Consumer<String> log = msg -> System.out.println("[LOG] " + msg);
+    static Consumer<String> log = msg -> System.out.println(msg);
 
     Predicate<Float> isValidAmount = a -> a > 0;
 
@@ -25,8 +25,23 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Multithreaded Banking App.");
-        System.out.println("Enter bank Account number: ");
-        int accountNumber = sc.nextInt();
+
+        int accountNumber;
+
+        while (true) {
+            try {
+                System.out.println("Enter bank Account number: ");
+                String accInput = sc.next();
+                AccountValidator.checkNumeric(accInput);
+                accountNumber = Integer.parseInt(accInput);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + " Please try again.");
+            }
+        }
+
+
+
         System.out.print("Enter Initial Balance: ");
         float balance = sc.nextFloat();
         BankAccount bankaccount= new BankAccount(accountNumber,balance);
@@ -101,4 +116,5 @@ public class Main {
 
         }
     }
+
 }

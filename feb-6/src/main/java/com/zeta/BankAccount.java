@@ -3,9 +3,9 @@ package com.zeta;
 public class BankAccount{
     float balance;
     int AccountNumber;
-    public BankAccount(int AccountNumber,float balance) {
+    public BankAccount(int AccountNumber, float balance) {
         this.balance = balance;
-        this.AccountNumber=AccountNumber;
+        this.AccountNumber= AccountNumber;
     }
 
     public synchronized void Deposit(float amount) throws InterruptedException {
