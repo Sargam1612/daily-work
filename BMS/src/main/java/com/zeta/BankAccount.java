@@ -5,13 +5,15 @@ import java.util.List;
 
 public class BankAccount {
 
+    private String name;
     private float balance;
     private final int accountNumber;
     private boolean hasLoan = false;
 
     private final List<Transaction> transactions = new ArrayList<>();
 
-    public BankAccount(int accountNumber, float balance) {
+    public BankAccount(int accountNumber, float balance,String name) {
+        this.name = name;
         this.balance = balance;
         this.accountNumber = accountNumber;
     }
@@ -51,6 +53,12 @@ public class BankAccount {
     public int getAccountNumber() {
         return accountNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Name: "+ name+ " , Account No: " + accountNumber + ", Balance: " + balance;
+    }
+
 
 
 }

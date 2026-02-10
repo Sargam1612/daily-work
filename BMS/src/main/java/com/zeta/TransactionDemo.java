@@ -4,8 +4,8 @@ public class TransactionDemo {
 
     public static void main(String[] args) {
 
-        BankAccount acc1 = new BankAccount(101, 1000);
-        BankAccount acc2 = new BankAccount(102, 500);
+        BankAccount acc1 = new BankAccount(101, 1000,"Rajesh");
+        BankAccount acc2 = new BankAccount(102, 500,"Shweta");
 
         acc1.Withdraw(100);
         acc2.Deposit(100);
