@@ -2,69 +2,56 @@ package com.zeta;
 
 public class BankTasks {
 
-    // Lambda versions
-//    public static Runnable WithdrawTask(BankAccount bankAccount, float amount) {
-//        return () -> bankAccount.Withdraw(amount);
-//    }
-//
-//    public static Runnable DepositTask(BankAccount bankAccount, float amount) {
-//        return () -> bankAccount.Deposit(amount);
-//    }
-
     public static class WithdrawTask implements Runnable {
-
-        private final BankAccount bankAccount;
+        private final BankAccount acc;
         private final float amount;
 
-        public WithdrawTask(BankAccount bankAccount, float amount) {
-            this.bankAccount = bankAccount;
+        public WithdrawTask(BankAccount acc, float amount) {
+            this.acc = acc;
             this.amount = amount;
         }
 
-        @Override
         public void run() {
             String t = Thread.currentThread().getName();
-            System.out.println(t + " trying to withdraw " + amount);
-            bankAccount.Withdraw(amount);
+            System.out.println(t + " attempting to withdraw " + amount);
+            acc.Withdraw(amount);
+            System.out.println(t + " successfully withdrew " + amount);
         }
     }
 
     public static class DepositTask implements Runnable {
-
-        private final BankAccount bankAccount;
+        private final BankAccount acc;
         private final float amount;
 
-        public DepositTask(BankAccount bankAccount, float amount) {
-            this.bankAccount = bankAccount;
+        public DepositTask(BankAccount acc, float amount) {
+            this.acc = acc;
             this.amount = amount;
         }
 
-        @Override
         public void run() {
             String t = Thread.currentThread().getName();
-            System.out.println(t + " trying to deposit " + amount);
-            bankAccount.Deposit(amount);
+            System.out.println(t + " attempting to deposit " + amount);
+            acc.Deposit(amount);
+            System.out.println(t + " successfully deposited " + amount);
         }
     }
 
     public static class SanctionLoanTask implements Runnable {
+        private final float p;
+        private final int t;
+        private final BankAccount acc;
 
-        private final float pAmount;
-        private final int tenure;
-        private final BankAccount bankAccount;
-
-        public SanctionLoanTask(float pAmount, int tenure, BankAccount bankAccount) {
-            this.pAmount = pAmount;
-            this.tenure = tenure;
-            this.bankAccount = bankAccount;
+        public SanctionLoanTask(float p, int t, BankAccount acc) {
+            this.p = p;
+            this.t = t;
+            this.acc = acc;
         }
 
-        @Override
         public void run() {
-            String t = Thread.currentThread().getName();
-            System.out.println(t + " processing loan...");
-            float interest = bankAccount.loanSanction(pAmount, tenure);
-            System.out.println("Loan sanctioned. Interest = " + interest);
+            String tName = Thread.currentThread().getName();
+            System.out.println(tName + " attempting to sanction loan");
+            float interest = acc.loanSanction(p, t);
+            System.out.println(tName + " loan sanctioned. Interest: " + interest);
         }
     }
 }

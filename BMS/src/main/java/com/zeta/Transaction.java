@@ -16,8 +16,10 @@ public class Transaction {
         this.time = LocalDateTime.now();
     }
 
-    @Override
     public String toString() {
-        return "Account: " + accountNumber + ", Type: " + type + ", Amount: " + amount + ", Time: " + time;
+        return "Account: " + accountNumber +
+                ", Type: " + type +
+                ", Amount: " + amount +
+                ", Time: " + time;
     }
 }
