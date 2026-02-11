@@ -2,11 +2,12 @@ package com.zeta;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
-public class HashMapDemo
+public class TreeMapDemo {
 
     private static void customKey() {
-        Map<MyKey, String> map = new HashMap<>();
+        Map<MyKey, String> map = new TreeMap<>();
         MyKey mykey = new MyKey();
         MyKey mykey1 = new MyKey();
         map.put(mykey, "value1");
@@ -31,9 +32,7 @@ public class HashMapDemo
     public static void main(String[] args) {
         basics();
         customKey();
-    }
+        ;
 
-
-    private static class MyKey {
     }
 }
