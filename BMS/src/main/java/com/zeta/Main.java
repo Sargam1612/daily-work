@@ -1,7 +1,7 @@
 package com.zeta;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,7 +18,8 @@ public class Main {
 
         int accountNumber;
         float balance;
-        List<BankAccount> BankAccountsList = new ArrayList<>();
+        int key = 1;
+        Map<Integer,BankAccount> BankAccountsMap = new HashMap<>();
         BankAccount bankaccount=null;
 
         ExecutorService executor = Executors.newFixedThreadPool(3);
@@ -53,7 +54,7 @@ public class Main {
                             System.out.print("Enter Initial Balance: ");
                             balance = sc.nextFloat();
                             bankaccount = new BankAccount(accountNumber, balance,name);
-                            BankAccountsList.add(bankaccount);
+                            BankAccountsMap.put(key++,bankaccount);
                             System.out.println("Your Account has been Created!");
                             System.out.println(bankaccount);
                             break;
@@ -63,15 +64,20 @@ public class Main {
 
                     case 2:
                         System.out.println("Existing Accounts are:");
-                        for(int i = 0; i<BankAccountsList.size(); i++) {
-                            System.out.println(BankAccountsList.get(i));
+                        for(int i = 1; i<= BankAccountsMap.size(); i++) {
+                            System.out.println(BankAccountsMap.get(i));
                         }
                         break;
 
                     case 3:
+                        System.out.println("Enter Account Number: ");
+                        String accInput = sc.next();
+                        AccountValidator.checkNumeric(accInput);
+                        accountNumber = Integer.parseInt(accInput);
                         System.out.print("Enter Amount to deposit: ");
                         float amount = sc.nextFloat();
                         Validator.check(amount);
+
                         executor.execute(new DepositTask(bankaccount, amount));
                         break;
 
