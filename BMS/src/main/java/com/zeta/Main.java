@@ -13,7 +13,7 @@ public class Main {
         Map<Integer, BankAccount> accounts = new HashMap<>();
         Scanner sc = new Scanner(System.in);
         BankAccount bankAccount=null;
-        System.out.println("LOG-IN in Banking App\n ");
+        System.out.println("\n\nLOG-IN in Banking App\n ");
         while(true){
             try{
                    bankAccount = getAccount(accounts);
@@ -25,6 +25,7 @@ public class Main {
         }
 
 
+        BankAccount acc=null;
         ExecutorService executor = Executors.newFixedThreadPool(3);
 
         while (true) {
@@ -62,8 +63,9 @@ public class Main {
                         System.out.print("Enter Initial Balance: ");
                         float bal = sc.nextFloat();
 
-                        BankAccount acc = new BankAccount(accNo, bal, name);
+                        acc = new BankAccount(accNo, bal, name);
                         accounts.put(accNo, acc);
+                        bankAccount=acc;
 
                         System.out.println("Account Created Successfully");
                         System.out.println(acc);
@@ -74,16 +76,14 @@ public class Main {
                         if (accounts.isEmpty()) {
                             System.out.println("No accounts found.");
                         } else {
-                            for (BankAccount acc : accounts.values()) {
-                                System.out.println(acc);
+                            for (BankAccount b : accounts.values()) {
+                                System.out.println(b);
                             }
                         }
                         break;
                     }
 
                     case 3: {
-                        BankAccount acc = getAccount(accounts);
-                        if (acc == null) break;
                         System.out.print("Enter amount to deposit: ");
                         float amt = sc.nextFloat();
                         Validator.check(amt);
@@ -92,8 +92,6 @@ public class Main {
                     }
 
                     case 4: {
-                        BankAccount acc = getAccount(accounts);
-                        if (acc == null) break;
                         System.out.print("Enter amount to withdraw: ");
                         float amt = sc.nextFloat();
                         Validator.check(amt);
@@ -102,15 +100,11 @@ public class Main {
                     }
 
                     case 5: {
-                        BankAccount acc = getAccount(accounts);
-                        if (acc == null) break;
                         System.out.println("Balance: " + acc.getBalance());
                         break;
                     }
 
                     case 6: {
-                        BankAccount acc = getAccount(accounts);
-                        if (acc == null) break;
                         float half = acc.getBalance() / 2;
                         executor.execute(new WithdrawTask(acc, half));
                         executor.execute(new WithdrawTask(acc, half));
@@ -118,8 +112,6 @@ public class Main {
                     }
 
                     case 7: {
-                        BankAccount acc = getAccount(accounts);
-                        if (acc == null) break;
                         System.out.print("Enter principal amount: ");
                         float p = sc.nextFloat();
                         System.out.print("Enter tenure: ");
@@ -129,8 +121,6 @@ public class Main {
                     }
 
                     case 8: {
-                        BankAccount acc = getAccount(accounts);
-                        if (acc == null) break;
                         if (acc.getTransactions().isEmpty()) {
                             System.out.println("No transactions yet.");
                         } else {

@@ -3,7 +3,7 @@ package com.zeta;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HashMapDemo
+public class HashMapDemo{
 
     private static void customKey() {
         Map<MyKey, String> map = new HashMap<>();

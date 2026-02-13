@@ -8,8 +8,8 @@ public class TreeMapDemo {
 
     private static void customKey() {
         Map<MyKey, String> map = new TreeMap<>();
-        MyKey mykey = new MyKey();
-        MyKey mykey1 = new MyKey();
+        MyKey mykey = new MyKey(1);
+        MyKey mykey1 = new MyKey(2);
         map.put(mykey, "value1");
         map.put(mykey1, "value2");
         System.out.println(map.get(mykey));
@@ -19,9 +19,10 @@ public class TreeMapDemo {
     }
 
     private static void basics() {
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new TreeMap<>();
         map.put("1", "value1");
         map.put("3", "value3");
+        System.out.println();
         System.out.println(map.put("1", "value2"));
         System.out.println(map.put("2", "value2")); //map.put->
         //It inserts or updates the value for that key
