@@ -1,0 +1,49 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Neha",
+      "email": "neha@test.com",
+      "gender": "Female"
+    },
+    {
+      "id": "7333",
+      "name": "sargam",
+      "email": "nema",
+      "gender": "Male"
+    },
+    {
+      "id": "ddc8",
+      "name": "krish",
+      "email": "krish@123.123",
+      "gender": "Male"
+    },
+    {
+      "id": "2360",
+      "name": "kanishka",
+      "email": "kan@23",
+      "gender": "Female",
+      "subjects": true
+    },
+    {
+      "id": "9d07",
+      "name": "sargam",
+      "email": "kan@23",
+      "gender": "Female",
+      "subjects": [
+        "Math",
+        "Science"
+      ]
+    },
+    {
+      "name": "sargam",
+      "email": "kan@23",
+      "gender": "Female",
+      "subjects": [
+        "Math",
+        "History"
+      ],
+      "id": "bb8e"
+    }
+  ]
+}
