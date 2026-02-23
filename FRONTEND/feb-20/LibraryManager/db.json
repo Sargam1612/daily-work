@@ -1,0 +1,28 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "Clean Code",
+      "author": "Robert Martin",
+      "available": true
+    },
+    {
+      "id": "2",
+      "title": "JS The Good Parts",
+      "author": "Douglas Crockford",
+      "available": true
+    },
+    {
+      "id": "c341",
+      "title": "Harry Potter",
+      "author": "J K Rowling",
+      "available": true
+    },
+    {
+      "id": "21fd",
+      "title": "Mathematica",
+      "author": "R S Aggarwal",
+      "available": true
+    }
+  ]
+}

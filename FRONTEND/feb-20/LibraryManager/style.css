@@ -1,0 +1,4 @@
+body{font-family:Arial;padding:20px}
+li{margin:8px 0}
+.available{color:rgb(0, 2, 128)}
+.issued{color:red;text-decoration:line-through}
