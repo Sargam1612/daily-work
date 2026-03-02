@@ -1,0 +1,33 @@
+package com.zeta.demo.controller;
+
+import com.zeta.demo.entity.OrderRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/order")
+public class OrderController {
+    @PostMapping
+    OrderRequest addOrder(@Valid @RequestBody OrderRequest order) {
+        System.out.println(order);
+        return order;
+    }
+    @GetMapping("/{id}")
+    String getOrder(@PathVariable String id) {
+        System.out.println(id);
+        return "success";
+    }
+    @GetMapping
+    String getOrder1() {
+        return "get all orders";
+    }
+
+
+}
